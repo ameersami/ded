@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Button from './components/Button/Button';
+import InputField from './components/InputField/InputField';
 
-ReactDOM.render(<Button />, document.getElementById('root'));
+ReactDOM.render(<InputField />, document.getElementById('root'));
