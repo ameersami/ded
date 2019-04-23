@@ -9,8 +9,14 @@ const InputField: React.FunctionComponent<InputFieldProps> = (props: InputFieldP
       <InputFieldInput 
         type={props.type}
         onBlur={props.onBlur}
+        onClick={props.onClick}
+        onFocus={props.onFocus}
+        onKeyUp={props.onKeyUp}
         onChange={props.onChange}
-        placeholder={props.placeholder} 
+        placeholder={props.placeholder}
+        value={props.value} 
+        min={props.min}
+        max={props.max}
       />
       <InputFieldLabel>{props.label}</InputFieldLabel>
     </InputFieldWrapper>
