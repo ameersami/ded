@@ -29,7 +29,9 @@ class App extends React.Component<{}, AppState>{
   }
 
   handleDOBChange = (day: Date, modifiers: Object) => {
-    console.log(day);
+    this.setState({
+      dob: day
+    });
   }
 
   render(){
@@ -48,7 +50,7 @@ class App extends React.Component<{}, AppState>{
             onChange={this.handleDeathAgeChange}
           />
         </LeftColumn>
-        <RightColumn/>
+        <RightColumn dob={this.state.dob} deathAge={this.state.deathAge} />
       </AppContainer>
     )
   }

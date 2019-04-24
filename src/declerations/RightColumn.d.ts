@@ -1,4 +1,4 @@
 export interface RightColumnProps {
-  dob: Date;
-  deathAge: number;
+  dob: Date | undefined;
+  deathAge: number | undefined;
 }
