@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
 
+import { AppState } from './declerations/App.d';
 import LeftColumn from './components/LeftColumn/LeftColumn';
 import RightColumn from './components/RightColumn/RightColumn';
 import DatePickerInput from './components/DatePickerInput/DatePickerInput';
@@ -14,16 +15,16 @@ const AppContainer = styled.div`
   width: 100%;
 `;
 
-class App extends React.Component<{}>{
+class App extends React.Component<{}, AppState>{
 
   state = {
     dob: undefined,
-    deathAge: 100
+    deathAge: undefined,
   }
 
-  handleDeathAgeChange = (e: React.SyntheticEvent) => {
+  handleDeathAgeChange = (e: any) => {
     this.setState({
-      deathAge: e.target.value
+      deathAge: e.target.value,
     })
   }
 
