@@ -5,7 +5,7 @@ const StyledLeftColumn = styled.div`
   box-shadow: 0 0 25px -2px rgba(255,255,255,0.15);
   box-sizing: border-box;
   height: 100vh;
-  width: 33%;
+  width: 25%;
   z-index: 1;
   padding: 40px;
 
