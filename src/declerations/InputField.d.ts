@@ -10,7 +10,7 @@ export interface InputFieldProps {
   onClick?: (e: React.SyntheticEvent) => any | Function;
   placeholder?: string;
   type?: 'text' | 'number';
-  value?: string;
+  value?: string | number | undefined;
   max?: number;
   min?: number;
 }
