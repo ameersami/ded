@@ -5,7 +5,7 @@ const WeekCalContainer = styled.div`
   background: #686781;
   border-radius: 10px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 40px);
 `;
 
 const WeekCalender: React.FunctionComponent<{}> = () => (

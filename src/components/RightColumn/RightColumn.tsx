@@ -3,6 +3,9 @@ import * as React from 'react';
 import { RightColumnProps } from '../../declerations/RightColumn.d';
 import StyledRightColumn from './RightColumn.styled';
 import WeekCalender from '../WeekCalender/WeekCalender';
+import TabGroup from '../TabGroup/TabGroup';
+
+const TabOptions = ['Calendar', 'Clock']
 
 const RightColumn: React.FunctionComponent<RightColumnProps> = (props) => {
   
@@ -16,7 +19,7 @@ const RightColumn: React.FunctionComponent<RightColumnProps> = (props) => {
 
   return (
     <StyledRightColumn>
-      <button onClick={toggleDisplay}>Toggle</button>
+      <TabGroup tabs={TabOptions} onChange={toggleDisplay} selectedTab={showCal ? TabOptions[0] : TabOptions[1]} />
       {showCal && <WeekCalender/>}
     </StyledRightColumn>
   );
