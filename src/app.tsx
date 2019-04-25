@@ -18,8 +18,8 @@ const AppContainer = styled.div`
 class App extends React.Component<{}, AppState>{
 
   state = {
-    dob: undefined,
-    deathAge: undefined,
+    dob: new Date('1997-03-14'),
+    deathAge: 80,
   }
 
   handleDeathAgeChange = (e: any) => {

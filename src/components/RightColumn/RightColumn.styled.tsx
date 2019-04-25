@@ -8,4 +8,17 @@ const StyledRightColumn = styled.div`
   padding: 40px;
 `;
 
-export default StyledRightColumn;
+const ContentContainer = styled.div`
+  background: #686781;
+  border-radius: 10px;
+  width: 100%;
+  height: calc(100% - 40px);
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export {
+  ContentContainer,
+  StyledRightColumn
+};
