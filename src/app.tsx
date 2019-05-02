@@ -6,6 +6,7 @@ import LeftColumn from './components/LeftColumn/LeftColumn';
 import RightColumn from './components/RightColumn/RightColumn';
 import DatePickerInput from './components/DatePickerInput/DatePickerInput';
 import InputField from './components/InputField/InputField';
+import Footer from './components/Footer/Footer';
 
 const AppContainer = styled.div`
   box-sizing: border-box;
@@ -50,6 +51,7 @@ class App extends React.Component<{}, AppState>{
             value={this.state.deathAge}
             onChange={this.handleDeathAgeChange}
           />
+          <Footer/>
         </LeftColumn>
         <RightColumn dob={this.state.dob} deathAge={this.state.deathAge} />
       </AppContainer>

@@ -8,6 +8,7 @@ const StyledLeftColumn = styled.div`
   width: 25%;
   z-index: 1;
   padding: 40px;
+  position: relative;
 
   & .DayPickerInput{
     width: 100%;
