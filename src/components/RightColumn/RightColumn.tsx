@@ -28,9 +28,12 @@ const RightColumn: React.FunctionComponent<RightColumnProps> = (props) => {
     setShowTime(!showTime);
   }
 
-  const deathDate = (props.dob && props.deathAge) ? getDeathDate(props.dob, props.deathAge) : 0;
-  const totalWeeks = (props.dob && props.deathAge) ? calculateNumTotalWeeks(props.dob, deathDate) : 0;
-  const weeksLived = (props.dob && props.deathAge) && calculateNumOfWeeksPassed(props.dob);
+  console.log(props.dob);
+  const dob = (!props.dob || isNaN(props.dob.getTime())) ? new Date() : props.dob;
+
+  const deathDate = (dob && props.deathAge) ? getDeathDate(dob, props.deathAge) : 0;
+  const totalWeeks = (dob && props.deathAge) ? calculateNumTotalWeeks(dob, deathDate) : 0;
+  const weeksLived = (dob && props.deathAge) && calculateNumOfWeeksPassed(dob);
 
   return (
     <StyledRightColumn>

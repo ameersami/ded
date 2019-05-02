@@ -35,6 +35,18 @@ const Label = styled.span`
 
 const CountDownLabel = styled.div`
   text-align: center;
+  margin: auto;
+  display: table;
+  font-size: 40px;
+  top: -50px;
+  position: relative;
+  color: #bdbdbd;
+  text-transform: capitalize;
+`;
+
+const CountdownWrapper = styled.div`
+  margin: auto;
+  display: table;
 `;
 
 const CountdownWLabels: React.FunctionComponent<CountdownProps> = ({ date = new Date() }) => (
@@ -42,7 +54,7 @@ const CountdownWLabels: React.FunctionComponent<CountdownProps> = ({ date = new 
     <CountDownLabel>
       What are you waiting for? Your life is ticking away!
     </CountDownLabel>
-    <div>
+    <CountdownWrapper>
       <Countdown date={date} renderer={
         ({ total, days, hours, minutes, seconds, milliseconds, completed }) => (
           <React.Fragment>
@@ -89,7 +101,7 @@ const CountdownWLabels: React.FunctionComponent<CountdownProps> = ({ date = new 
           </React.Fragment>
         )
       }/>
-    </div>
+    </CountdownWrapper>
   </CountdownContainer>
 );
 

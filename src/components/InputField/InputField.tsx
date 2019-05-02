@@ -17,6 +17,7 @@ const InputField: React.FunctionComponent<InputFieldProps> = (props: InputFieldP
         value={props.value} 
         min={props.min}
         max={props.max}
+        disabled={props.isDisabled}
       />
       <InputFieldLabel>{props.label}</InputFieldLabel>
     </InputFieldWrapper>
@@ -30,6 +31,7 @@ InputField.defaultProps = {
   onChange: (e) => {},
   placeholder: ' ',
   label: 'InputField',
+  isDisabled: false,
 }
 
 export default InputField;

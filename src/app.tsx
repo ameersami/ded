@@ -28,9 +28,9 @@ class App extends React.Component<{}, AppState>{
     })
   }
 
-  handleDOBChange = (day: Date, modifiers: Object) => {
+  handleDOBChange = (e: Date) => {
     this.setState({
-      dob: day
+      dob: e
     });
   }
 
@@ -40,6 +40,7 @@ class App extends React.Component<{}, AppState>{
         <LeftColumn>
           <DatePickerInput 
             label="Date of Birth"
+            value={this.state.dob}
             onDayChange={this.handleDOBChange}
           />
           <InputField 

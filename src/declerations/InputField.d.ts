@@ -13,4 +13,5 @@ export interface InputFieldProps {
   value?: string | number | undefined;
   max?: number;
   min?: number;
+  isDisabled?: boolean;
 }
