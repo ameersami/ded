@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "npx webpack-dev-server --open --colors --hot --mode development",
     "build": "npm run test && npx webpack --mode production",
-    "test": "npx jest --config=jest.config.json"
+    "test": "npx jest --config=jest.config.json --coverage --coverageDirectory=output/coverage/jest"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
