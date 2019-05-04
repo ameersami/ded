@@ -1,4 +1,4 @@
-import { default as styled } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledLeftColumn = styled.div`
   background: #4A4A4A;
@@ -24,5 +24,5 @@ const LogoContainer = styled.div`
 
 export {
   LogoContainer,
-  StyledLeftColumn
+  StyledLeftColumn,
 };

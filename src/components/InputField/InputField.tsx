@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { InputFieldProps } from '../../declerations/InputField';
+import { InputFieldProps } from '../../declerations/InputField.d';
 import { InputFieldWrapper, InputFieldInput, InputFieldLabel } from './InputField.styled';
 
 const InputField: React.FunctionComponent<InputFieldProps> = (props: InputFieldProps) => {

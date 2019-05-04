@@ -1,4 +1,4 @@
-import { default as styled } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledRightColumn = styled.div`
   width: 75%;
@@ -20,5 +20,5 @@ const ContentContainer = styled.div`
 
 export {
   ContentContainer,
-  StyledRightColumn
+  StyledRightColumn,
 };

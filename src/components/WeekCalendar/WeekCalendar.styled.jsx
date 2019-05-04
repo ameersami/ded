@@ -1,4 +1,4 @@
-import { default as styled } from 'styled-components';
+import styled from 'styled-components';
 
 const WeekContainer = styled.div`
   -webkit-flex: 1;
@@ -12,8 +12,8 @@ const WeekContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const WeekBox: any = styled.div`
-  background: ${(props: any) => props.notLived ? 'white' : 'blue'};
+const WeekBox = styled.div`
+  background: ${props => props.notLived ? 'white' : 'blue'};
   height: 7px;
   width: 7px;
   box-sizing: border-box;
@@ -21,5 +21,5 @@ const WeekBox: any = styled.div`
 
 export {
   WeekContainer,
-  WeekBox
-}
+  WeekBox,
+};

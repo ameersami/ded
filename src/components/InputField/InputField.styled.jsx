@@ -1,4 +1,4 @@
-import { default as styled } from 'styled-components';
+import styled from 'styled-components';
 
 const InputFieldWrapper = styled.label`
   display: block;
@@ -58,5 +58,5 @@ const InputFieldInput = styled.input`
 export {
   InputFieldWrapper,
   InputFieldLabel,
-  InputFieldInput  
-}
+  InputFieldInput,
+};

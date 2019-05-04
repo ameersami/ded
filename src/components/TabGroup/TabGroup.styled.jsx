@@ -1,10 +1,10 @@
-import { default as styled } from 'styled-components';
+import styled from 'styled-components';
 
 const Tab = styled.button`
   border: none;
   background: none;
-  color: ${(props: any) => props.isSelected ? '#2196f3' : 'white'};
-  border-bottom: 2px solid ${(props: any) => props.isSelected ? '#2196f3' : 'transparent'};
+  color: ${props => props.isSelected ? '#2196f3' : 'white'};
+  border-bottom: 2px solid ${props => props.isSelected ? '#2196f3' : 'transparent'};
   text-transform: uppercase;
 
   &:focus {
@@ -21,5 +21,5 @@ const TabContainer = styled.div`
 
 export {
   Tab,
-  TabContainer
+  TabContainer,
 }
