@@ -13,7 +13,7 @@ const CustomDatePickerInput: React.FunctionComponent<DatePickerInputProps> = ({ 
       showMonthDropdown
       openToDate={value}
       selected={value}
-      customInput={<InputField/>}
+      customInput={<InputField label={label}/>}
       value={value}
       dateFormat="MMMM d, yyyy"
       onChange={onDayChange}
