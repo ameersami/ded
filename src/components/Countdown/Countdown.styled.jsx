@@ -13,10 +13,16 @@ const CountdownBlock = styled.div`
 
 const Date = styled.span`
   color: #ffffff;
-  font-size: 16px;
   width: 100%;
   float: left;
   font-size: 56px;
+  
+  @media only screen and (max-width: 1056px) {
+    &{
+      font-size: 26px;
+    }
+  }
+
 `;
 
 const Label = styled.span`
@@ -36,6 +42,13 @@ const CountDownLabel = styled.div`
   position: relative;
   color: #bdbdbd;
   text-transform: capitalize;
+
+  @media only screen and (max-width: 1056px) {
+    &{
+      font-size: 22px;
+    }
+  }
+
 `;
 
 const CountdownWrapper = styled.div`

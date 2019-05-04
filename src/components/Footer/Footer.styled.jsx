@@ -16,6 +16,15 @@ const StyledFooterText = styled.div`
     color: white;
   }
 
+  @media only screen and (max-width: 1056px) {
+    &{
+      position: relative;
+      bottom: 0px;
+      left: 0px;
+      margin-top: 40px;
+    }
+  }
+
 `;
 
 const Heart = styled.div`

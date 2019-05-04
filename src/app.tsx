@@ -14,6 +14,15 @@ const AppContainer = styled.div`
   height: 100vh;
   overflow: hidden;
   width: 100%;
+  flex-direction: row;
+
+  @media only screen and (max-width: 1056px) {
+    &{
+      flex-direction: column;
+      overflow-y: scroll;
+    }
+  }
+
 `;
 
 class App extends React.Component<{}, AppState>{

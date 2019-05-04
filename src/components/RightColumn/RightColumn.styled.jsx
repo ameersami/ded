@@ -6,6 +6,13 @@ const StyledRightColumn = styled.div`
   box-sizing: border-box;
   background: #28264B;
   padding: 40px;
+
+  @media only screen and (max-width: 1056px) {
+    &{
+      width: 100%;
+    }
+  }
+
 `;
 
 const ContentContainer = styled.div`
@@ -16,6 +23,11 @@ const ContentContainer = styled.div`
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
 `;
 
 export {

@@ -13,6 +13,12 @@ const StyledLeftColumn = styled.div`
   & .DayPickerInput{
     width: 100%;
   }
+
+  @media only screen and (max-width: 1056px) {
+    &{
+      width: 100%;
+    }
+  }
   
 `;
 
