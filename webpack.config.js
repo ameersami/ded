@@ -30,6 +30,7 @@ module.exports = (env, { mode = 'development' }) => {
                 'babel-plugin-styled-components',
                 '@babel/plugin-proposal-class-properties',
                 '@babel/plugin-proposal-object-rest-spread',
+                'babel-plugin-add-react-displayname',
               ],
             },
           },

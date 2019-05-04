@@ -1,5 +1,10 @@
 import * as React from 'react';
 import { default as styled } from 'styled-components';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
+
+LogRocket.init('lmgdge/ded');
+setupLogRocketReact(LogRocket);
 
 import { AppState } from './declerations/App.d';
 import LeftColumn from './components/LeftColumn/LeftColumn';
