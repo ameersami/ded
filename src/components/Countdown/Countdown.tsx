@@ -90,14 +90,6 @@ const CountdownWLabels: React.FunctionComponent<CountdownProps> = ({ date = new 
                 seconds
               </Label>
             </CountdownBlock>
-            <CountdownBlock>
-              <Date>
-                {milliseconds}
-              </Date>
-              <Label>
-                milliseconds
-              </Label>
-            </CountdownBlock>
           </React.Fragment>
         )
       }/>
