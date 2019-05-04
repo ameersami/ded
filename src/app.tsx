@@ -19,7 +19,7 @@ const AppContainer = styled.div`
 class App extends React.Component<{}, AppState>{
 
   state = {
-    dob: new Date('1997-03-14'),
+    dob: new Date('1999-01-01'),
     deathAge: 80,
   }
 

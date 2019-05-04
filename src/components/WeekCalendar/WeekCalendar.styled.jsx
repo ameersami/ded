@@ -13,7 +13,7 @@ const WeekContainer = styled.div`
 `;
 
 const WeekBox = styled.div`
-  background: ${props => props.notLived ? 'white' : 'blue'};
+  background: ${props => props.notLived ? '#e0e0e0' : '#27264B'};
   height: 7px;
   width: 7px;
   box-sizing: border-box;
