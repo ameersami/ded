@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { default as styled } from 'styled-components';
 
 const DatePickerWrapper = styled.div`
   & .react-datepicker__input-container {

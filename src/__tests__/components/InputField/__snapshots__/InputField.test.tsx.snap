@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputField/> should render 1`] = `
+<styled.label
+  className=""
+>
+  <styled.input
+    disabled={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    placeholder=" "
+    type="text"
+  />
+  <styled.span>
+    InputField
+  </styled.span>
+</styled.label>
+`;

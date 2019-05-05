@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { default as styled } from 'styled-components';
 
 const StyledLeftColumn = styled.div`
   background: #4A4A4A;

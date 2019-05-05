@@ -3,7 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "module": "amd",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "outDir": "./dist/",
     "preserveConstEnums": true,
     "removeComments": true,
@@ -11,7 +11,7 @@
     "target": "es6",
     "moduleResolution": "node",
     "strict": false,
-    "alwaysStrict": true,
+    "alwaysStrict": false,
     "strictNullChecks": false,
     "downlevelIteration": true
   },

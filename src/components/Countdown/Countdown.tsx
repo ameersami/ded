@@ -11,7 +11,7 @@ import {
   Label,
 } from './Countdown.styled';
 
-const CountdownWLabels: React.FunctionComponent<CountdownProps> = ({ date = new Date() }) => (
+const CountdownWLabels: React.FunctionComponent<CountdownProps> = ({ date }) => (
   <CountdownContainer>
     <CountDownLabel>
       What are you waiting for? Your life is ticking away!

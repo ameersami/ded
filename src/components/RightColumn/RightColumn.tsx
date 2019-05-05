@@ -8,13 +8,13 @@ import Countdown from '../Countdown/Countdown';
 
 const TabOptions = ['Calendar', 'Clock']
 
-const calculateNumOfWeeksPassed = (dob: Date): number => Math.floor(((new Date() - dob) / 86400000) / 7);
+const calculateNumOfWeeksPassed = (dob: any): number => Math.floor(((+new Date() - dob) / 86400000) / 7);
 
-const calculateNumTotalWeeks = (dob: Date, deathDate: Date): number => Math.floor(((deathDate - dob) / 86400000 ) / 7);
+const calculateNumTotalWeeks = (dob: any, deathDate: any): number => Math.floor(((deathDate - dob) / 86400000 ) / 7);
 
-const getDeathDate = (dob: Date, deathAge: Number): Date => {
+const getDeathDate = (dob: Date, deathAge: number): Date => {
   const deathDate = new Date(dob);
-  deathDate.setFullYear(dob.getFullYear() + parseInt(deathAge));
+  deathDate.setFullYear(dob.getFullYear() + deathAge);
   return deathDate;
 }
 
@@ -31,7 +31,7 @@ const RightColumn: React.FunctionComponent<RightColumnProps> = (props) => {
   console.log(props.dob);
   const dob = (!props.dob || isNaN(props.dob.getTime())) ? new Date() : props.dob;
 
-  const deathDate = (dob && props.deathAge) ? getDeathDate(dob, props.deathAge) : 0;
+  const deathDate: Date = (dob && props.deathAge) ? getDeathDate(dob, props.deathAge) : new Date();
   const totalWeeks = (dob && props.deathAge) ? calculateNumTotalWeeks(dob, deathDate) : 0;
   const weeksLived = (dob && props.deathAge) && calculateNumOfWeeksPassed(dob);
 
