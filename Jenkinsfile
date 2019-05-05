@@ -5,6 +5,13 @@ pipeline {
     nodejs 'recent node'
   }
   stages {
+    stage('Prepare') {
+      steps {
+        script {
+          sh 'npm install yarn -g'
+        }
+      }
+    }
     stage('Startup') {
       steps {
         script {
