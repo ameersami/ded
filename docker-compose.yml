@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  ded:	
+    image: ded:latest	
+    deploy:
+      restart_policy:
+        condition: "any"
+        delay: "0"
+        max_attempts: 3
+        window: "30s"	
+    ports: 	
+      - "8080"	
+    networks:	
+      - web	
+      - default	
+    labels:	
+      - "traefik.docker.network=web"	
+      - "traefik.enable=true"	
+      - "traefik.ded.frontend.rule=Host:ded.ameersami.com"	
+      - "traefik.ded.frontend.port=8080"	
+      - "traefik.ded.frontend.protocol=http"
+
+networks:
+  web:
+    external: 
+      name: web
