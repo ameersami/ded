@@ -41,17 +41,13 @@ pipeline {
     stage('Deploy') {
       steps {
         script {
-          import groovy.json.JsonSlurper
-          def jsonSlurper = new JsonSlurper()
-
           withCredentials([usernamePassword(credentialsId: 'Portainer',
               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
               //available as an env variable, but will be masked if you try to print it out any which way
               sh 'echo $PASSWORD'
               echo "${env.USERNAME}"
               def response = sh 'curl --header "Accept: application/json" --request POST --data '{"username":"${env.USERNAME}","password":"${env.PASSWORD}"}' https://portainer.ameersami.com/api/auth'
-              def object = jsonSlurper.parseText(response)
-              echo object.jwt
+              echo response
           }
         }
       }
