@@ -21,9 +21,12 @@ pipeline {
               sh 'echo $PASSWORD'
               echo "${env.USERNAME}"
               def json = '''\
-              {"Username": $USERNAME , "Password": $PASSWORD}'
+              {"Username": \\"$USERNAME\\" , "Password": \\"$PASSWORD\\"}
               '''
-              def response = sh 'curl --header "Accept: application/json" --request POST --data $json https://portainer.ameersami.com/api/auth'
+              echo json
+              def response = sh "curl POST 'https://portainer.ameersami.com/api/auth' \ 
+                              -H 'Content-Type: application/json' \
+                              -d '$json'"
               echo response
           }
         }
