@@ -20,7 +20,7 @@ pipeline {
               //available as an env variable, but will be masked if you try to print it out any which way
               sh 'echo $PASSWORD'
               echo "${env.USERNAME}"
-              def response = sh 'curl --header "Accept: application/json" --request POST --data { \\"Username\\": $USERNAME,\\"Password\\": $PASSWORD } https://portainer.ameersami.com/api/auth'
+              def response = sh 'curl --header "Accept: application/json" --request POST --data '''{ \\"Username\\": \\"$USERNAME\\",\\"Password\\": \\"$PASSWORD\\" }''' https://portainer.ameersami.com/api/auth'
               echo response
           }
         }
