@@ -22,7 +22,7 @@ pipeline {
               echo "${env.USERNAME}"
               def json = "'{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }'"
               echo json
-              sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '\'{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }\'' "
+              sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '\\'{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }\\'' "
               // def response = sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '\"{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }\"' "
               // echo response
           }
