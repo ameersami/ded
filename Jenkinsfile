@@ -17,17 +17,26 @@ pipeline {
         script {
           def jwt = ""
           withCredentials([usernamePassword(credentialsId: 'Portainer',
-              usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+              usernameVariable: 'PORTAINER_USERNAME', passwordVariable: 'PORTAINER_PASSWORD')]) {
               def json = """
-                  {"Username": "$USERNAME", "Password": "$PASSWORD"}
+                  {"Username": "$PORTAINER_USERNAME", "Password": "$PORTAINER_PASSWORD"}
               """
               def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
               def jsonSlurper = new groovy.json.JsonSlurper();
               def obj = jsonSlurper.parseText(response.getContent());
-              echo obj.jwt
               jwt = obj.jwt
           }
           echo jwt
+          withCredentials([usernamePassword(credentialsId: 'Github',
+              usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
+              def requestURL = """
+                  https://portainer.ameersami.com/api/endpoints/1/docker/build?t=portfolio:latest&remote=https://"$GITHUB_USERNAME":"$GITHUB_PASSWORD"@github.com/"$GITHUB_USERNAME"/ded.git&dockerfile=Dockerfile&nocache=true
+              """
+              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, url: requestURL, customHeaders:[[name:'Authorization', value:"Bearer ${jwt}"]]
+              def jsonSlurper = new groovy.json.JsonSlurper();
+              def obj = jsonSlurper.parseText(response.getContent());
+              echo obj
+          }
         }
       }
     }
