@@ -28,7 +28,10 @@ pipeline {
               // echo json
               // sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }' "
               // def response = sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '\"{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }\"' "
-              // echo response
+              def jsonSlurper = new groovy.json.JsonSlurper();
+              def obj = jsonSlurper.parseText(response.getContent());
+              echo obj.jwt
+              echo response.getContent()
           }
         }
       }
