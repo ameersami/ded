@@ -30,7 +30,7 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: 'Github',
               usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
               def requestURL = """
-                  https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://ameersami:$GITHUB_PASSWORD@github.com/ameersami/ded.git&dockerfile=Dockerfile&nocache=true
+                  https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://github.com/ameersami/ded.git&dockerfile=Dockerfile&nocache=true
               """
               def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, url: requestURL, customHeaders:[[name:'Authorization', value:"Bearer ${jwt}"]]
               def jsonSlurper = new groovy.json.JsonSlurper();
