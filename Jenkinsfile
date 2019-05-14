@@ -15,24 +15,19 @@ pipeline {
     stage('Deploy') {
       steps {
         script {
+          def jwt = ""
           withCredentials([usernamePassword(credentialsId: 'Portainer',
               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-              //available as an env variable, but will be masked if you try to print it out any which way
-              sh 'echo $PASSWORD'
-              echo "${env.USERNAME}"
-              def secondjson = """
+              def json = """
                   {"Username": "$USERNAME", "Password": "$PASSWORD"}
               """
-              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: secondjson, url: "https://portainer.ameersami.com/api/auth"
-              // def json = "'{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }'"
-              // echo json
-              // sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }' "
-              // def response = sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '\"{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }\"' "
+              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
               def jsonSlurper = new groovy.json.JsonSlurper();
               def obj = jsonSlurper.parseText(response.getContent());
               echo obj.jwt
-              echo response.getContent()
+              jwt = obj.jwt
           }
+          echo jwt
         }
       }
     }
