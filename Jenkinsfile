@@ -23,12 +23,12 @@ pipeline {
               def secondjson = """
                   {"Username": "$USERNAME", "Password": "$PASSWORD"}
               """
-              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, requestBody: secondjson, url: "https://portainer.ameersami.com/api/auth"
+              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: secondjson, url: "https://portainer.ameersami.com/api/auth"
               // def json = "'{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }'"
               // echo json
               // sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }' "
               // def response = sh "curl --request POST https://portainer.ameersami.com/api/auth -H '\"Content-Type: application/json\"' -d '\"{\"Username:\" \"$USERNAME\" , \"Password:\" \"$PASSWORD\" }\"' "
-              echo response
+              // echo response
           }
         }
       }
