@@ -52,7 +52,7 @@ pipeline {
             }
           }
 
-          if(existingStackId){
+          if(existingStackId?.trim()) {
             // Update the stack
             def json = """
                   {"Prune": "true"}
