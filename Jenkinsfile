@@ -21,8 +21,8 @@ pipeline {
               def json = """
                   {"Username": "$PORTAINER_USERNAME", "Password": "$PORTAINER_PASSWORD"}
               """
-              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
-              def obj = new groovy.json.JsonSlurper().parseText(response.getContent())
+              def jwtResponse = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
+              def obj = new groovy.json.JsonSlurper().parseText(jwtResponse.getContent())
               jwt = obj.jwt
           }
           echo jwt
@@ -33,13 +33,13 @@ pipeline {
                 https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/$GITHUB_USERNAME/ded.git&dockerfile=Dockerfile&nocache=true
               """
               waitUntil {
-                def response = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
+                httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
               }
           }
           
           // Get all stacks
-          def response = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://portainer.ameersami.com/api/stacks", validResponseCodes: '200', customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
-          def stacks = new groovy.json.JsonSlurper().parseText(response.getContent())
+          def stackResponse = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://portainer.ameersami.com/api/stacks", validResponseCodes: '200', customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
+          def stacks = new groovy.json.JsonSlurper().parseText(stackResponse.getContent())
           
           Boolean stackExists = false
           String existingStackId = 0
@@ -62,7 +62,7 @@ pipeline {
             def stackURL = """
               https://portainer.ameersami.com/api/stacks/$existingStackId
             """
-            def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, requestBody: json, url: stackURL
+            httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, requestBody: json, url: stackURL
 
           } else {
             // Create a new stack
