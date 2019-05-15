@@ -41,20 +41,18 @@ pipeline {
           def stackResponse = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://portainer.ameersami.com/api/stacks", validResponseCodes: '200', consoleLogResponseBody: true, customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
           def stacks = new groovy.json.JsonSlurper().parseText(stackResponse.getContent())
           
-          Boolean stackExists = false
-          String existingStackId = 0
+          String existingStackId = ""
           stacks.each { stack ->
             String stackId = stack.Id
             String stackName = stack.Name
             echo "$stackId"
             echo "$stackName"
             if(stackName == "DED") {
-              stackExists = true
               existingStackId = stackId
             }
           }
 
-          if(stackExists){
+          if(existingStackId){
             // Update the stack
             def json = """
                   {"Prune": "true"}
