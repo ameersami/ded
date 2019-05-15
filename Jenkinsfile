@@ -28,8 +28,11 @@ pipeline {
           }
           echo jwt
           def Bearer = "Bearer ${jwt}"
+          def registryAuth = """
+                  {"Username": "", "Password": ""}
+              """
               waitUntil {
-                def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://github.com/ameersami/ded.git&dockerfile=Dockerfile&nocache=true", customHeaders:[[name:"Authorization", value: Bearer ]]
+                def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://github.com/ameersami/ded.git&dockerfile=Dockerfile&nocache=true", customHeaders:[[name:"Authorization", value: Bearer ], [name: "X-Registry-Auth", value: registryAuth]]
                 def jsonSlurper = new groovy.json.JsonSlurper();
                 def obj = jsonSlurper.parseText(response.getContent());
                 echo obj
