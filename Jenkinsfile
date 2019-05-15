@@ -67,7 +67,7 @@ pipeline {
           } else {
             // Create a new stack
             withCredentials([usernamePassword(credentialsId: 'Github', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
-              def swarmResponse = httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://portainer.ameersami.com/api/endpoints/1/docker/swarm"
+              def swarmResponse = httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://portainer.ameersami.com/api/endpoints/1/docker/swarm", customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
               def swarmInfo = new groovy.json.JsonSlurper().parseText(swarmResponse.getContent())
 
               def createStackJson = """
