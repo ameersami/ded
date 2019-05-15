@@ -37,10 +37,9 @@ pipeline {
           def response = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://portainer.ameersami.com/api/stacks", validResponseCodes: '200', customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
           def list = new groovy.json.JsonSlurper().parseText(response.getContent())
           list.each { key, value ->
-            def stack = new groovy.json.JsonSlurper().parseText(key)
-            if(stack.Name == "myStack"){
+            if(stack[1].split(':')[1] == "myStack"){
               echo 'OK it worked'
-              echo "$stack.Id"
+              echo "$stack[0]"
             }
           }
         }
