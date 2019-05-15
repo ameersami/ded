@@ -74,7 +74,7 @@ pipeline {
                 {"Name": "DED", "SwarmID": "$swarmInfo.ID", "RepositoryURL": "https://github.com/$GITHUB_USERNAME/ded", "ComposeFilePathInRepository": "docker-compose.yml", "RepositoryAuthentication": "true", "RepositoryUsername": "$GITHUB_USERNAME", "RepositoryPassword": "$GITHUB_PASSWORD"}
               """
 
-              if(swarmInfo?.trim()) {
+              if(swarmInfo.ID?.trim()) {
                 def createStackResponse = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: createStackJson, url: "https://portainer.ameersami.com/api/stacks?method=repository&type=1&endpointId=1", customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
               }
               
