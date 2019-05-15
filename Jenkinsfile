@@ -38,11 +38,11 @@ pipeline {
           // }
           
           // Get all stacks
+          String existingStackId = ""
           if("true") {
             def stackResponse = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://portainer.ameersami.com/api/stacks", validResponseCodes: '200', consoleLogResponseBody: true, customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
             def stacks = new groovy.json.JsonSlurper().parseText(stackResponse.getContent())
             
-            String existingStackId = ""
             stacks.each { stack ->
               String stackId = stack.Id
               String stackName = stack.Name
