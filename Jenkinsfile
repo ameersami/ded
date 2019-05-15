@@ -16,24 +16,29 @@ pipeline {
       steps {
         script {
           def jwt = ""
-          withCredentials([usernamePassword(credentialsId: 'Portainer',
-              usernameVariable: 'PORTAINER_USERNAME', passwordVariable: 'PORTAINER_PASSWORD')]) {
+          withCredentials([usernamePassword(credentialsId: 'Portainer', usernameVariable: 'PORTAINER_USERNAME', passwordVariable: 'PORTAINER_PASSWORD')]) {
               def json = """
                   {"Username": "$PORTAINER_USERNAME", "Password": "$PORTAINER_PASSWORD"}
               """
-              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
-              def jsonSlurper = new groovy.json.JsonSlurper();
-              def obj = jsonSlurper.parseText(response.getContent());
+              def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
+              def obj = new groovy.json.JsonSlurper().parseText(response.getContent())
               jwt = obj.jwt
           }
           echo jwt
-          def Bearer = "Bearer ${jwt}"
+          withCredentials([usernamePassword(credentialsId: 'Github', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
+              def repoURL = """
+                https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://$GITHUB_USERNAME:$GITHUB_PASSWORDgithub.com/$GITHUB_USERNAME/ded.git&dockerfile=Dockerfile&nocache=true
+              """
               waitUntil {
-                def response = httpRequest httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://github.com/ameersami/ded.git&dockerfile=Dockerfile&nocache=true", customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
-                def jsonSlurper = new groovy.json.JsonSlurper();
-                def obj = jsonSlurper.parseText(response.getContent());
-                echo obj
+                def response = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
               }
+          }
+          
+          def response = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://portainer.ameersami.com/api/stacks", validResponseCodes: '200', customHeaders:[[name:"Authorization", value: "Bearer ${jwt}" ], [name: "cache-control", value: "no-cache"]]
+          def list = new groovy.json.JsonSlurper().parseText(response)
+          list.each { key, value ->
+            println "$key : $value"
+          }
         }
       }
     }
