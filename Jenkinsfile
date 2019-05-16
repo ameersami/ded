@@ -25,6 +25,7 @@ pipeline {
               def jwtResponse = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
               def jwtObject = new groovy.json.JsonSlurper().parseText(jwtResponse.getContent())
               params.jwtToken = "Bearer ${jwtObject.jwt}"
+              echo "${params.jwtToken}"
           }
         }
       }
@@ -37,7 +38,7 @@ pipeline {
               def repoURL = """
                 https://portainer.ameersami.com/api/endpoints/1/docker/build?t=ded:latest&remote=https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/$GITHUB_USERNAME/ded.git&dockerfile=Dockerfile&nocache=true
               """
-              httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: params.jwtToken ], [name: "cache-control", value: "no-cache"]]
+              def imageResponse = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: params.jwtToken ], [name: "cache-control", value: "no-cache"]]
           }
         }
       }
