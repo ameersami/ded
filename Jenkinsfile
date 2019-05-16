@@ -24,7 +24,8 @@ pipeline {
               """
               def jwtResponse = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
               def jwtObject = new groovy.json.JsonSlurper().parseText(jwtResponse.getContent())
-              params.JWTTOKEN = "Bearer ${jwtObject.jwt}"
+              build.replaceAction(new ParametersAction(new StringParameterValue('JWTTOKEN', 'Bearer ${jwtObject.jwt}')))
+              // params.JWTTOKEN = "Bearer ${jwtObject.jwt}"
               echo "${params.JWTTOKEN}"
           }
         }
