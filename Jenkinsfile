@@ -30,12 +30,7 @@ pipeline {
               echo "${params.JWTTOKEN}"
               echo "**************************"
               
-              def newJWTTOkenParameter = new StringParameterValue('JWTTOKEN', 'Bearer $jwtObject.jwt')
-              
-              echo "**************************"
-              echo "${newJWTTOkenParameter}"
-              echo "**************************"
-              
+              def newJWTTOkenParameter = new StringParameterValue('JWTTOKEN', 'Bearer $jwtObject.jwt')              
               build.replaceAction(new ParametersAction(newJWTTOkenParameter))
 
               echo "**************************"
