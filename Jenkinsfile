@@ -9,13 +9,14 @@ pipeline {
       steps {
         script {
           sh 'npm install yarn -g'
+          sh 'yarn install'
         }
       }
     }
     stage('Test') {
       steps {
         script {
-          sh 'npm run test'
+          sh 'yarn test'
         }
       }
       post {
@@ -27,7 +28,7 @@ pipeline {
     stage('Build') {
       steps {
         script {
-          sh 'npm build'
+          sh 'yarn build'
         }
       }
     }
