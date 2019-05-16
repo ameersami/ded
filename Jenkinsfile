@@ -30,6 +30,7 @@ pipeline {
               echo "${params.JWTTOKEN}"
               echo "**************************"
               
+              import hudson.model.*
               def build = Thread.currentThread().executable
               build.replaceAction(new ParametersAction([new StringParameterValue("JWTTOKEN", 'Bearer $jwtObject.jwt')], ["JWTTOKEN"]))
 
