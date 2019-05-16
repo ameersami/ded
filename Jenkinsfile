@@ -4,9 +4,6 @@ pipeline {
   tools {
     nodejs 'recent node'
   }
-  environment {
-        JWTTOKEN = ''
-  }
   stages {
     stage('Prepare') {
       steps {
@@ -24,17 +21,10 @@ pipeline {
               """
               def jwtResponse = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: json, url: "https://portainer.ameersami.com/api/auth"
               def jwtObject = new groovy.json.JsonSlurper().parseText(jwtResponse.getContent())
-              echo "**************************"
-              echo "${env.JWTTOKEN}"
-              echo "**************************"
-
               env.JWTTOKEN = "Bearer ${jwtObject.jwt}"
-
-              echo "**************************"
-              echo "${env.JWTTOKEN}"
-              echo "**************************"
           }
         }
+        echo "${env.JWTTOKEN}"
       }
     }
     stage('Build Docker Image on Portainer') {
