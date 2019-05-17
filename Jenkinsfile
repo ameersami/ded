@@ -60,9 +60,10 @@ pipeline {
         }
       }
     }
-    stage('Update/Deploy Stack to Portainer') {
+    stage('Delete old Stack') {
       steps {
         script {
+
           // Get all stacks
           String existingStackId = ""
           if("true") {
@@ -76,30 +77,34 @@ pipeline {
             }
           }
 
-          def createStackJson = ""
-
           if(existingStackId?.trim()) {
-            // Update the stack
-            def json = """
-                  {"Prune": "true"}
-            """
+            // Delete the stack
             def stackURL = """
               https://portainer.ameersami.com/api/stacks/$existingStackId
             """
-            httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, requestBody: json, url: stackURL, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
+            httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'DELETE', ignoreSslErrors: true, url: stackURL, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
 
-          } else {
-            // Stack does not exist
-            // Generate JSON for when the stack is created
-            withCredentials([usernamePassword(credentialsId: 'Github', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
-              def swarmResponse = httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://portainer.ameersami.com/api/endpoints/1/docker/swarm", customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
-              def swarmInfo = new groovy.json.JsonSlurper().parseText(swarmResponse.getContent())
+          }
 
-              createStackJson = """
-                {"Name": "DED", "SwarmID": "$swarmInfo.ID", "RepositoryURL": "https://github.com/$GITHUB_USERNAME/ded", "ComposeFilePathInRepository": "docker-compose.yml", "RepositoryAuthentication": true, "RepositoryUsername": "$GITHUB_USERNAME", "RepositoryPassword": "$GITHUB_PASSWORD"}
-              """
+        }
+      }
+    }
+    stage('Deploy new stack to Portainer') {
+      steps {
+        script {
+          
+          def createStackJson = ""
 
-            }
+          // Stack does not exist
+          // Generate JSON for when the stack is created
+          withCredentials([usernamePassword(credentialsId: 'Github', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
+            def swarmResponse = httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://portainer.ameersami.com/api/endpoints/1/docker/swarm", customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
+            def swarmInfo = new groovy.json.JsonSlurper().parseText(swarmResponse.getContent())
+
+            createStackJson = """
+              {"Name": "DED", "SwarmID": "$swarmInfo.ID", "RepositoryURL": "https://github.com/$GITHUB_USERNAME/ded", "ComposeFilePathInRepository": "docker-compose.yml", "RepositoryAuthentication": true, "RepositoryUsername": "$GITHUB_USERNAME", "RepositoryPassword": "$GITHUB_PASSWORD"}
+            """
+
           }
 
           if(createStackJson?.trim()) {
