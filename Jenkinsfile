@@ -82,7 +82,7 @@ pipeline {
             def stackURL = """
               https://portainer.ameersami.com/api/stacks/$existingStackId
             """
-            httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'DELETE', ignoreSslErrors: true, url: stackURL, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
+            httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '204', httpMode: 'DELETE', ignoreSslErrors: true, url: stackURL, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
 
           }
 
