@@ -4,10 +4,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { DatePickerInputProps } from '../../declerations/DatePickerInput.d';
 import InputField from '../InputField/InputField';
-import { DatePickerWrapper } from './DatePickerInput.styled';
+import './DatePickerInput.css';
 
 const CustomDatePickerInput: React.FunctionComponent<DatePickerInputProps> = ({ onDayChange, label="", value }) => (
-  <DatePickerWrapper>
+  <div className="DatePickerWrapper">
     <DatePicker
       showYearDropdown
       showMonthDropdown
@@ -18,7 +18,7 @@ const CustomDatePickerInput: React.FunctionComponent<DatePickerInputProps> = ({ 
       dateFormat="MMMM d, yyyy"
       onChange={onDayChange}
     />
-  </DatePickerWrapper>
+  </div>
 );
 
 export default CustomDatePickerInput;

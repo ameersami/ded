@@ -1,0 +1,38 @@
+:root {
+  --app-background-color: #f2f2f2;
+  --calendar-background-color: #b2b2b2;
+  --active-tab-color: pink;
+  --color-change-transition: 0.4s;
+}
+
+.appContainer {
+  box-sizing: border-box;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  flex-direction: row;
+  background: var(--app-background-color);
+  padding: 40px;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+}
+
+.appContainer.darkMode {
+  --app-background-color: #23282d;
+  --calendar-background-color: #343c43;
+  --active-tab-color: pink;
+}
+
+.appContainer > svg {
+  align-self: flex-start;
+}
+
+@media only screen and (max-width: 1056px) {
+  .appContainer{
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+}

@@ -1,0 +1,57 @@
+.footerText {
+  bottom: 40px;
+  left: 40px;
+  color: white;
+}
+
+.footerText > span:first-of-type{
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.footerText a {
+  color: white;
+}
+
+@media only screen and (max-width: 1056px) {
+  .footerText{
+    position: relative;
+    bottom: 0px;
+    left: 0px;
+    margin-top: 40px;
+  }
+}
+
+.heart {
+  background-color: red;
+  height: 10px;
+  transform: rotate(-45deg);
+  width: 10px;
+  display: inline-block;
+  margin: 0 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.heart:hover, .heart:hover:before, .heart:hover:after{
+  background-color: pink;
+  transition: all 0.2s ease-in-out;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: 10px;
+  position: absolute;
+  width: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.heart:after{
+  right: -6px;
+}
+
+.heart:before{
+  top: -6px;
+}

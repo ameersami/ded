@@ -1,0 +1,33 @@
+.configurationCard {
+  background: var(--calendar-background-color);
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
+  box-sizing: border-box;
+  transition: background 0.4s ease-in-out;
+}
+
+.configuration-input-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 60px;
+}
+
+.configuration-input-group > div:first-of-type {
+  margin-right: 12px;
+}
+
+.configurationCard > .footerText {
+  margin-top: 20px;
+}
