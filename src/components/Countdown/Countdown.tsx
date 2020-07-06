@@ -2,61 +2,54 @@ import * as React from 'react';
 import Countdown from 'react-countdown-now';
 
 import { CountdownProps } from '../../declerations/Countdown.d';
-import {
-  CountdownBlock,
-  CountdownContainer,
-  CountDownLabel,
-  CountdownWrapper,
-  Date,
-  Label,
-} from './Countdown.styled';
+import './Countdown.css';
 
 const CountdownWLabels: React.FunctionComponent<CountdownProps> = ({ date }) => (
-  <CountdownContainer>
-    <CountDownLabel>
+  <div className="countdownContainer">
+    <div className="countdownLabel">
       What are you waiting for? Your life is ticking away!
-    </CountDownLabel>
-    <CountdownWrapper>
+    </div>
+    <div className="countdownWrapper">
       <Countdown date={date} renderer={
         ({ total, days, hours, minutes, seconds, milliseconds, completed }) => (
           <React.Fragment>
-            <CountdownBlock>
-              <Date>
+            <div className="countdownBlock">
+              <span className="date">
                 {Math.floor(days/7)}
-              </Date>
-              <Label>
+              </span>
+              <span className="label">
                 weeks
-              </Label>
-            </CountdownBlock>
-            <CountdownBlock>
-              <Date>
+              </span>
+            </div>
+            <div className="countdownBlock">
+              <span className="date">
                 {hours}
-              </Date>
-              <Label>
+              </span>
+              <span className="label">
                 hours
-              </Label>
-            </CountdownBlock>
-            <CountdownBlock>
-              <Date>
+              </span>
+            </div>
+            <div className="countdownBlock">
+              <span className="date">
                 {minutes}
-              </Date>
-              <Label>
+              </span>
+              <span className="label">
                 minutes
-              </Label>
-            </CountdownBlock>
-            <CountdownBlock>
-              <Date>
+              </span>
+            </div>
+            <div className="countdownBlock">
+              <span className="date">
                 {seconds}
-              </Date>
-              <Label>
+              </span>
+              <span className="label">
                 seconds
-              </Label>
-            </CountdownBlock>
+              </span>
+            </div>
           </React.Fragment>
         )
       }/>
-    </CountdownWrapper>
-  </CountdownContainer>
+    </div>
+  </div>
 );
 
 export default CountdownWLabels;
