@@ -40,7 +40,7 @@ const WeekCalendar: React.FunctionComponent<WeekCalendarProps> = (props) => {
       const context: any = canvasRef.current.getContext("2d");
       const canvas: any = canvasRef.current;
       canvas.width = 500;
-      canvas.height = 700;
+      canvas.height = ((props.totalWeeks/52) * 10) + 20;
       drawBoard(context, props.totalWeeks, props.weeksLived);
     }
   }, [canvasRef]);
