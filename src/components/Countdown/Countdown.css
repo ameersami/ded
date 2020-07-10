@@ -36,7 +36,7 @@
   display: table;
   font-size: 40px;
   position: relative;
-  color: #bdbdbd;
+  color: var(--text-color);
   text-transform: capitalize;
 }
 

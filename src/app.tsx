@@ -10,6 +10,7 @@ import { appStateReducer, appInitialState } from './utils/AppStateUtil';
 import './app.css';
 import Logo from './components/Logo/Logo';
 import ConfigurationCard from './components/ConfigurationCard/ConfigurationCard';
+import DarkModeToggle from './components/DarkModeToggle/DarkModeToggle';
 
 const App: React.FunctionComponent<{}> = () => {
   const [isDarkMode, setIsDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -33,9 +34,11 @@ const App: React.FunctionComponent<{}> = () => {
   }
 
   return(
-    <div className={`appContainer ${isDarkMode ? 'darkMode' : null}`}>
-      <Logo/>
-      <input type="checkbox" className="darkModeToggle" onChange={() => setIsDarkMode(!isDarkMode)} />
+    <div className={`appContainer ${isDarkMode ? 'darkMode' : 'day'}`}>
+      <div className="header">
+        <Logo/>
+        <DarkModeToggle onClick={() => setIsDarkMode(!isDarkMode)} />
+      </div>
       <DaysRemainingDisplay dob={dob} deathAge={deathAge} />
       <ConfigurationCard dob={dob} deathAge={deathAge} dispatch={dispatch}/>
     </div>

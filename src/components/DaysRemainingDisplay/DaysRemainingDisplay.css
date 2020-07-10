@@ -1,11 +1,12 @@
 .styledRightColumn {
   width: 75%;
-  height: 100vh;
+  height: auto;
   box-sizing: border-box;
   padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 1056px) {
