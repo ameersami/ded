@@ -18,10 +18,18 @@ const App: React.FunctionComponent<{}> = () => {
   const {dob, deathAge}: any = state;
 
   React.useEffect(() => {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleClientDarkModeChange);
-    
-    return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', handleClientDarkModeChange);
+    if (window.matchMedia('(prefers-color-scheme: dark)').addEventListener) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleClientDarkModeChange);
+      
+      return () => {
+        window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', handleClientDarkModeChange);
+      }
+    } else {
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(handleClientDarkModeChange);
+      
+      return () => {
+        window.matchMedia('(prefers-color-scheme: dark)').removeListener(handleClientDarkModeChange);
+      }
     }
   }, []);
 
