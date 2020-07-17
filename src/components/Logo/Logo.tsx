@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-const Logo: React.FunctionComponent<{}> = () => (
+const Logo: React.FunctionComponent<{ darkMode: boolean }> = (props) => (
   <svg width="171px" height="60px" viewBox="0 0 171 60" version="1.1">
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="Desktop-HD" transform="translate(-40.000000, -40.000000)">
               <g id="Group-2" transform="translate(40.000000, 40.000000)">
-                  <text id="DED" fontFamily="ArialRoundedMTBold, Arial Rounded MT Bold" fontSize="45" fontWeight="normal" letterSpacing="0.5625" fill="#FFFFFF">
+                  <text id="DED" fontFamily="ArialRoundedMTBold, Arial Rounded MT Bold" fontSize="45" fontWeight="normal" letterSpacing="0.5625" fill={props.darkMode ? '#FFFFFF' : 'black'}>
                       <tspan x="75.3383789" y="47">DED</tspan>
                   </text>
                   <g id="Group">

@@ -2,6 +2,7 @@
   --app-background-color: #f2f2f2;
   --calendar-background-color: #b2b2b2;
   --active-tab-color: pink;
+  --tab-color: black;
   --color-change-transition: 0.4s;
   --text-color: black;
 }
@@ -38,6 +39,7 @@
   --calendar-background-color: #343c43;
   --active-tab-color: pink;
   --text-color: #bdbdbd;
+  --tab-color: #e0e0e0;
 }
 
 .header > svg {
@@ -45,6 +47,10 @@
   flex-grow: 0;
   flex-shrink: 0;
   user-select: none;
+}
+
+.header > svg text {
+  transition: fill 0.2s ease-in-out;
 }
 
 .appContainer > svg text {

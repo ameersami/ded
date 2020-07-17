@@ -24,10 +24,11 @@
 
 .label {
   width: 100%;
-  color: #b0bec5;
+  color: var(--text-color);
   float: left;
   clear: both;
   font-size: 14px;
+  transition: color 0.2s ease-in-out;
 }
 
 .countdownLabel {
@@ -38,6 +39,7 @@
   position: relative;
   color: var(--text-color);
   text-transform: capitalize;
+  transition: color 0.2s ease-in-out;
 }
 
 @media only screen and (max-width: 1056px) {
@@ -48,5 +50,7 @@
 
 .countdownWrapper {
   margin: auto;
-  display: table;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

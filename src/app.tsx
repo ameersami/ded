@@ -36,7 +36,7 @@ const App: React.FunctionComponent<{}> = () => {
   return(
     <div className={`appContainer ${isDarkMode ? 'darkMode' : 'day'}`}>
       <div className="header">
-        <Logo/>
+        <Logo darkMode={isDarkMode}/>
         <DarkModeToggle onClick={() => setIsDarkMode(!isDarkMode)} />
       </div>
       <DaysRemainingDisplay dob={dob} deathAge={deathAge} />
